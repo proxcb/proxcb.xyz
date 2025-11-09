@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>proxcb blog</title>
+
+  
+  
+  <link rel="stylesheet" href="https:&#x2F;&#x2F;proxcb.xyz&#x2F;style.css">
+</head>
+
+<body>
+  <section class="section">
+    <div class="container">
+      
+<p><a href="/">back</a></p>
+<h1 class="title">
+  State of vim.pack in 2025
+</h1>
+<!-- <p class="subtitle"><strong>2025-11-09</strong></p> -->
+
+<h3 id="about">About</h3>
+<p>As of <strong>November 2025</strong>, version <strong>0.12.0</strong> is still a prerelease development build</p>
+<p>I'll share some of my thoughts and examples on <code>vim.pack</code> and whether it would be worth doing the switch already. This is primarily just an introductory of basic usage of plugins and of my experience with vim.pack. If you notice any inconsistencies or problems in this article, feel free to contact me with recommendations.</p>
+<h3 id="examples">Examples</h3>
+<p>Documentation can be found with <code>:help vim.pack</code></p>
+<p><strong>Installing plugins is very straightforward:</strong></p>
+<pre style="background-color:#1a191a;color:#bebebe;"><code><span>vim.pack.add({
+</span><span>  -- Install plugin
+</span><span>  &quot;https://github.com/coolplugin-org/coolplugin&quot;,
+</span><span>
+</span><span>  -- Or with a table
+</span><span>  { src = &quot;https://github.com/windwp/nvim-autopairs&quot; },
+</span><span>  { src = &quot;https://github.com/L3MON4D3/LuaSnip&quot; },
+</span><span>  { src = &quot;https://github.com/Saghen/blink.cmp&quot; }
+</span><span>})
+</span></code></pre>
+<p>You can do more with this, such as defining a version or a name but that is irrelevant for me.</p>
+<p><strong>Lazy loading can be done as well:</strong></p>
+<pre data-lang="lua" style="background-color:#1a191a;color:#bebebe;" class="language-lua "><code class="language-lua" data-lang="lua"><span style="color:#616161;">-- load immediately
+</span><span style="color:#616161;">-- require(&quot;nvim-autopairs&quot;).setup({})
+</span><span>
+</span><span>vim.api.nvim_create_autocmd(&quot;InsertEnter&quot;, {
+</span><span>  callback = function()
+</span><span>    vim.cmd(&quot;packadd nvim-autopairs&quot;) 
+</span><span>    require(&quot;nvim-autopairs&quot;).setup({})
+</span><span>  end,
+</span><span>})
+</span></code></pre>
+<h4 id="configuring-an-lsp">Configuring an LSP</h4>
+<p>File structure:</p>
+<pre data-lang="text" style="background-color:#1a191a;color:#bebebe;" class="language-text "><code class="language-text" data-lang="text"><span>nvim/
+</span><span>├─ lua/
+</span><span>│  └─ plugins/
+</span><span>│     └─ lsp.lua
+</span><span>└─ init.lua
+</span></code></pre>
+<p>lsp.lua using mason:</p>
+<pre data-lang="lua" style="background-color:#1a191a;color:#bebebe;" class="language-lua "><code class="language-lua" data-lang="lua"><span>vim.pack.add{
+</span><span>  { src = &#39;https://github.com/neovim/nvim-lspconfig&#39; },
+</span><span>  { src = &#39;https://github.com/mason-org/mason.nvim&#39; },
+</span><span>  { src = &#39;https://github.com/mason-org/mason-lspconfig.nvim&#39; },
+</span><span>  { src = &#39;https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim&#39; },
+</span><span>}
+</span><span>
+</span><span>require(&#39;mason&#39;).setup()
+</span><span>require(&#39;mason-lspconfig&#39;).setup()
+</span><span>require(&#39;mason-tool-installer&#39;).setup({
+</span><span>    </span><span style="color:#616161;">-- Define languages
+</span><span>    ensure_installed = {
+</span><span>        &quot;lua_ls&quot;,
+</span><span>        &quot;clangd&quot;,
+</span><span>        &quot;pyright&quot;
+</span><span>    }
+</span><span>})
+</span></code></pre>
+<p>And requiring <code>lsp.lua</code> within <code>init.lua</code></p>
+<pre style="background-color:#1a191a;color:#bebebe;"><code><span>require(&#39;plugins.lsp&#39;)
+</span></code></pre>
+<h3 id="ease-of-use">Ease of use</h3>
+<p>Primarily why I wanted to give vim.pack a try is because I wanted something native and fairly straightforward to use. vim.pack has definitely succeeded with that for me even if it is a prerelease build. The roadmap for neovim does show that the 0.12 release will be when vim.pack goes on the main development branch. At the moment we are in 0.11 so it shouldn't be too long of a wait.</p>
+<p>I'd suggest anybody to give vim.pack a try if they are not fully content with their current plugin manager.</p>
+<p>As I said before there's fairly good documentation already on vim.pack if you run <code>:help vim.pack</code> on the prerelease build of neovim.</p>
+
+
+    </div>
+  </section>
+</body>
+
+</html>
