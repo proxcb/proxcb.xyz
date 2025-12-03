@@ -1,206 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-      <title></title>
-      <link>https://proxcb.xyz</link>
-      <description></description>
-      <generator>Zola</generator>
-      <language>en</language>
-      <atom:link href="https://proxcb.xyz/rss.xml" rel="self" type="application/rss+xml"/>
-      <lastBuildDate>Wed, 03 Dec 2025 00:00:00 +0000</lastBuildDate>
-      <item>
-          <title>Switch to a window manager</title>
-          <pubDate>Wed, 03 Dec 2025 00:00:00 +0000</pubDate>
-          <author>Unknown</author>
-          <link>https://proxcb.xyz/blog/window-managers/</link>
-          <guid>https://proxcb.xyz/blog/window-managers/</guid>
-          <description xml:base="https://proxcb.xyz/blog/window-managers/">&lt;h1 id=&quot;preface&quot;&gt;Preface&lt;&#x2F;h1&gt;
-&lt;p&gt;I hate floating windows. That&#x27;s why I use a tiling window manager.
-I’ll go over why tiling window managers (TWMs) in my opinion beat traditional desktop environments (DEs) like macOS,
-Windows, &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;www.gnome.org&#x2F;&quot;&gt;GNOME&lt;&#x2F;a&gt; and &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;kde.org&#x2F;&quot;&gt;KDE&lt;&#x2F;a&gt; in terms of comfort, customizability and productivity for programmers!&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;em&gt;This article primarily concerns Linux but there are other articles on the alternatives for macOS (&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;koekeishiya&#x2F;yabai&quot;&gt;Yabai&lt;&#x2F;a&gt;) and Windows (&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;LGUG2Z&#x2F;komorebi&quot;&gt;Komorebi&lt;&#x2F;a&gt;, &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;FancyWM&#x2F;fancywm&quot;&gt;FancyWM&lt;&#x2F;a&gt;)&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https:&#x2F;&#x2F;proxcb.xyz&#x2F;blog&#x2F;window-managers&#x2F;#what-are-tiling-window-managers&quot;&gt;What are Tiling Window Managers?&lt;&#x2F;a&gt;&lt;&#x2F;strong&gt;&lt;br&gt;
-1.1 &lt;strong&gt;&lt;a href=&quot;https:&#x2F;&#x2F;proxcb.xyz&#x2F;blog&#x2F;window-managers&#x2F;#benefits-over-a-traditional-desktop-environment&quot;&gt;Benefits over a traditional desktop environment&lt;&#x2F;a&gt;&lt;&#x2F;strong&gt;&lt;&#x2F;li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https:&#x2F;&#x2F;proxcb.xyz&#x2F;blog&#x2F;window-managers&#x2F;#surviving-without-a-desktop-environment&quot;&gt;Surviving without a desktop environment&lt;&#x2F;a&gt;&lt;&#x2F;strong&gt;&lt;br&gt;
-2.2 &lt;strong&gt;&lt;a href=&quot;https:&#x2F;&#x2F;proxcb.xyz&#x2F;blog&#x2F;window-managers&#x2F;#configuration&quot;&gt;Configuration&lt;&#x2F;a&gt;&lt;&#x2F;strong&gt;&lt;&#x2F;li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https:&#x2F;&#x2F;proxcb.xyz&#x2F;blog&#x2F;window-managers&#x2F;#what-tiling-window-manager-to-choose&quot;&gt;What tiling window manager to choose?&lt;&#x2F;a&gt;&lt;&#x2F;strong&gt;&lt;&#x2F;li&gt;
-&lt;&#x2F;ol&gt;
-&lt;h1 id=&quot;what-are-tiling-window-managers&quot;&gt;What are Tiling window managers?&lt;&#x2F;h1&gt;
-&lt;p&gt;Tiling window managers automatically organize your windows into tiles. Unlike traditional desktops that use floating windows. You don’t need to manually drag or
-resize them, which reduces reliance on the mouse and can significantly speed up your workflow.&lt;&#x2F;p&gt;
-&lt;p&gt;Tiling window managers are of course window managers, which means they often times come with minimal or no external software such as a calculator or a GUI to update your packages.
-This is where a lot of people have a hard time switching from a Desktop Environment which bundles both a window manager and &quot;quality of life applications&quot;.&lt;&#x2F;p&gt;
-&lt;p&gt;On Linux, window managment works differently depending on whether you&#x27;re using X11 or Wayland.
-Under X11, you have a separate display server and a window manager (such as i3wm, bspwm or qtile) that controls window placement, behavior and decorations like the titlebar or shadows.
-Under Wayland, the display server and window-management functionality are combined into a single component called the compositor, which is responsible for input handling, window management, and rendering.&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;wayland.freedesktop.org&#x2F;architecture.html&quot;&gt;Wayland architecture:&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;proxcb.xyz&#x2F;blog&#x2F;window-managers&#x2F;.&#x2F;wayland-architecture.png&quot; alt=&quot;&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
-&lt;p&gt;Basically what you should know is that X11 is old and Wayland is the newer guy who is supposed to replace X11 in the future, though X11 is still widely used and developed on.&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;X_Window_System_protocols_and_architecture&quot;&gt;X11 Architecture&lt;&#x2F;a&gt;:&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;proxcb.xyz&#x2F;blog&#x2F;window-managers&#x2F;.&#x2F;x-architecture.png&quot; alt=&quot;&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;benefits-over-a-traditional-desktop-environment&quot;&gt;Benefits over a traditional desktop environment&lt;&#x2F;h2&gt;
-&lt;p&gt;&lt;strong&gt;1.&lt;&#x2F;strong&gt;
-TWMs enable greater control of windows. Being able to primarily utilize the keyboard instead of trying to drag windows or desktop environment specific keybinds for primitive tiling.
-All of these factor into a more productive workflow without distractions.&lt;&#x2F;p&gt;
-&lt;div style=&quot;position: relative; display: inline-block;&quot;&gt;
-  &lt;img src=&quot;.&#x2F;soyjak.png&quot;
-       alt=&quot;&quot;
-       class=&quot;soyjak&quot;
-       style=&quot;
-         position: absolute;
-         left: -400px;
-         top: 0;      
-         width: 450px;
-         height: auto;
-         z-index: 1000;
-         opacity: 0.7;
-       &quot;&gt;
-  &lt;div&gt;
-    &lt;video 
-      autoplay 
-      loop 
-      muted 
-      playsinline 
-      preload=&quot;metadata&quot;
-      style=&quot;max-width: 100%; height: auto;&quot;&gt;
-      &lt;source src=&quot;.&#x2F;demo.mp4&quot; type=&quot;video&#x2F;mp4&quot;&gt;
-    &lt;&#x2F;video&gt;
-    &lt;br&gt;
-    Demo of navigation in &lt;a href=&quot;https:&#x2F;&#x2F;dwm.suckless.org&#x2F;&quot;&gt;DWM&lt;&#x2F;a&gt;
-  &lt;&#x2F;div&gt;
-&lt;&#x2F;div&gt;
-&lt;style&gt;
-.left-img {
-    float: left !important;
-    margin: 0 !important;
-    display: block !important;
-    width: 150px;
-    height: auto;
-}
-&lt;&#x2F;style&gt;
-&lt;p&gt;&lt;strong&gt;2.&lt;&#x2F;strong&gt;
-Comfort is an incredibly important part of the daily use of a computer. Workplaces often advocate proper ergonomic hygiene but the operating system itself is practically always disregarded.&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;strong&gt;3.&lt;&#x2F;strong&gt;
-Greater benefit from muscle memory with a more intuitive way of navigating on your computer. When you can use a super simple and quick shortcut you don&#x27;t have to worry about eye-to-hand movement and neurons firing off over looking for a window. Helps concentration.
-&lt;br&gt;&lt;em&gt;A con is that you need to learn the navigation for it to become muscle memory, expect to bypass regular DE speed within a week&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;strong&gt;4.&lt;&#x2F;strong&gt;
-The lack of preinstalled software prompts the user to hopefully create an opinionated setup. Having something thats tailored to your own needs and interests is crucial for me and I think this should be a more common practice. Do it once and its great for a long term.&lt;&#x2F;p&gt;
-&lt;hr&gt;
-&lt;p&gt;Content creator Primeagen has a great short segment on Window Managers and their benefits in the timestamped linked:&lt;br&gt;
-&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=03KsS09YS4E&amp;amp;t=350s&quot;&gt; Developer Productivity, v2 with ThePrimeagen | Preview &lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
-&lt;h1 id=&quot;surviving-without-a-desktop-environment&quot;&gt;Surviving without a desktop environment&lt;&#x2F;h1&gt;
-&lt;p&gt;So how do you manage without the &lt;em&gt;huge&lt;&#x2F;em&gt; amount of applications that you would presumably lack in a tiling window manager?&lt;&#x2F;p&gt;
-&lt;p&gt;If you already have a desktop environment installed you can install a TWM of your choice and your applications will work without problems 99% of the time as long as they
-both share the same display protocol (&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Wayland_(protocol)#Differences_between_Wayland_and_X&quot;&gt;Wayland&#x2F;X11&lt;&#x2F;a&gt;)&lt;&#x2F;p&gt;
-&lt;h2 id=&quot;configuration&quot;&gt;Configuration&lt;&#x2F;h2&gt;
-&lt;p&gt;Most TWM already ship with the very essentials, like a terminal and a statusbar, but some do not. If you are on a brand new install you can install these via your package manager and configure your TWM to use these for your shortcuts.&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;strong&gt;Most tiling window managers store their settings in a .config directory, where you can edit files to:&lt;br&gt;&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
-&lt;ul&gt;
-&lt;li&gt;Define keybindings for opening, closing, and moving windows and other shortcuts such as opening a browser&lt;&#x2F;li&gt;
-&lt;li&gt;Set window layouts and default behaviors&lt;&#x2F;li&gt;
-&lt;li&gt;Configure status bars, workspaces, and notifications&lt;&#x2F;li&gt;
-&lt;li&gt;Integrate favorite applications into your workflow&lt;&#x2F;li&gt;
-&lt;&#x2F;ul&gt;
-&lt;p&gt;&lt;em&gt;Note: other applications will have their own configuration files and locations accordingly&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
-&lt;p&gt;Luckily there is an incredible amount of resources on top of the documentation that each window manager provides. Search engine is your best friend.&lt;&#x2F;p&gt;
-&lt;p&gt;Examples of default configuration files provided by different window managers:&lt;br&gt;
-&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;swaywm&#x2F;sway&#x2F;blob&#x2F;master&#x2F;config.in&quot;&gt;Sway, Wayland&lt;&#x2F;a&gt;&lt;br&gt;
-&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;hyprwm&#x2F;Hyprland&#x2F;blob&#x2F;main&#x2F;example&#x2F;hyprland.conf&quot;&gt;Hyrpland, Wayland&lt;&#x2F;a&gt;&lt;br&gt;
-&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;i3wm.org&#x2F;docs&#x2F;i3.html?utm_source=chatgpt.com#_config_i3_config_or_i3_config&quot;&gt;i3wm, X11&lt;&#x2F;a&gt;&lt;br&gt;
-&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;git.suckless.org&#x2F;dwm&#x2F;file&#x2F;config.def.h.html&quot;&gt;DWM, X11&lt;&#x2F;a&gt;&lt;br&gt;&lt;&#x2F;p&gt;
-&lt;h1 id=&quot;what-tiling-window-manager-to-choose&quot;&gt;What tiling window manager to choose?&lt;&#x2F;h1&gt;
-&lt;p&gt;If you are interested in tiling window managers, the best way to pick is based on if you use X11 or Wayland.&lt;&#x2F;p&gt;
-&lt;p&gt;For X11, &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;i3wm.org&#x2F;&quot;&gt;i3wm&lt;&#x2F;a&gt; is the simplest tiling window manager and in my opinion one of the best to use. Configuration is pretty straightforward and the default configuration is good.&lt;&#x2F;p&gt;
-&lt;p&gt;If you are on Wayland then &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;swaywm.org&#x2F;&quot;&gt;Sway&lt;&#x2F;a&gt; is basically the same as i3wm but supported for Wayland, thus a great option.&lt;&#x2F;p&gt;
-&lt;p&gt;If you want more flare and animations then &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;hypr.land&#x2F;&quot;&gt;Hyprland&lt;&#x2F;a&gt; is a great option.&lt;&#x2F;p&gt;
-&lt;p&gt;Arch Wiki is a great resource for information regarding the different window managers available, here are a few links:&lt;br&gt;
-&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;wiki.archlinux.org&#x2F;title&#x2F;Window_manager&quot;&gt;Window Managers&lt;&#x2F;a&gt;,
-&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;wiki.archlinux.org&#x2F;title&#x2F;I3&quot;&gt;i3wm&lt;&#x2F;a&gt;,
-&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;wiki.archlinux.org&#x2F;title&#x2F;Hyprland&quot;&gt;Hyprland&lt;&#x2F;a&gt;,&lt;&#x2F;p&gt;
-</description>
-      </item>
-      <item>
-          <title>proxcb.xyz</title>
-          <pubDate>Sun, 09 Nov 2025 00:00:00 +0000</pubDate>
-          <author>Unknown</author>
-          <link>https://proxcb.xyz/blog/thename/</link>
-          <guid>https://proxcb.xyz/blog/thename/</guid>
-          <description xml:base="https://proxcb.xyz/blog/thename/">&lt;p&gt;The name is a shorthand I came up with from “Proxima Centauri b” (the exoplanet). I know... it&#x27;s genius! And to add to that, the TLD .xyz can be interpreted as coordinates.&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;proxcb.xyz&#x2F;blog&#x2F;thename&#x2F;.&#x2F;1.png&quot; alt=&quot;&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
-</description>
-      </item>
-      <item>
-          <title>State of vim.pack</title>
-          <pubDate>Sun, 09 Nov 2025 00:00:00 +0000</pubDate>
-          <author>Unknown</author>
-          <link>https://proxcb.xyz/blog/vimpack/</link>
-          <guid>https://proxcb.xyz/blog/vimpack/</guid>
-          <description xml:base="https://proxcb.xyz/blog/vimpack/">&lt;h3 id=&quot;about&quot;&gt;About&lt;&#x2F;h3&gt;
-&lt;p&gt;As of &lt;strong&gt;November 2025&lt;&#x2F;strong&gt;, version &lt;strong&gt;0.12.0&lt;&#x2F;strong&gt; is still a prerelease development build&lt;&#x2F;p&gt;
-&lt;p&gt;I&#x27;ll share some of my thoughts and examples on &lt;code&gt;vim.pack&lt;&#x2F;code&gt; and whether it would be worth doing the switch already. This is primarily just an introductory of basic usage of plugins and of my experience with vim.pack. If you notice any inconsistencies or problems in this article, feel free to contact me with recommendations.&lt;&#x2F;p&gt;
-&lt;p&gt;My full neovim config can be found at &lt;strong&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;proxcb&#x2F;nvim&quot;&gt;github.com&#x2F;proxcb&#x2F;nvim&lt;&#x2F;a&gt;&lt;&#x2F;strong&gt;,
-It contains a barebone (at the time of this post) configuration for development which is easy to expand on, I&#x27;m still primarily using Helix so I will be adding to it over time.&lt;&#x2F;p&gt;
-&lt;h3 id=&quot;examples&quot;&gt;Examples&lt;&#x2F;h3&gt;
-&lt;p&gt;Documentation can be found with &lt;code&gt;:help vim.pack&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;strong&gt;Installing plugins is very straightforward:&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
-&lt;pre data-lang=&quot;lua&quot; style=&quot;background-color:#282a36;color:#f8f8f2;&quot; class=&quot;language-lua &quot;&gt;&lt;code class=&quot;language-lua&quot; data-lang=&quot;lua&quot;&gt;&lt;span style=&quot;color:#ffffff;&quot;&gt;vim&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff79c6;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span&gt;pack&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff79c6;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#50fa7b;&quot;&gt;add&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffffff;&quot;&gt;{
-&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6272a4;&quot;&gt;-- Install plugin
-&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f1fa8c;&quot;&gt;&amp;quot;https:&#x2F;&#x2F;github.com&#x2F;coolplugin-org&#x2F;coolplugin&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;,
-&lt;&#x2F;span&gt;&lt;span&gt;
-&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6272a4;&quot;&gt;-- Or with a table
-&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffffff;&quot;&gt;{ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f1fa8c;&quot;&gt;src &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f1fa8c;&quot;&gt;&amp;quot;https:&#x2F;&#x2F;github.com&#x2F;windwp&#x2F;nvim-autopairs&amp;quot; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffffff;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;,
-&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffffff;&quot;&gt;{ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f1fa8c;&quot;&gt;src &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f1fa8c;&quot;&gt;&amp;quot;https:&#x2F;&#x2F;github.com&#x2F;L3MON4D3&#x2F;LuaSnip&amp;quot; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffffff;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;,
-&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffffff;&quot;&gt;{ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f1fa8c;&quot;&gt;src &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f1fa8c;&quot;&gt;&amp;quot;https:&#x2F;&#x2F;github.com&#x2F;Saghen&#x2F;blink.cmp&amp;quot; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffffff;&quot;&gt;}
-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffffff;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;)
-&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
-&lt;p&gt;You can do more with this, such as defining a version or a name but that is irrelevant for me.&lt;&#x2F;p&gt;
-&lt;p&gt;&lt;strong&gt;Lazy loading can be done as well:&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
-&lt;pre data-lang=&quot;lua&quot; style=&quot;background-color:#282a36;color:#f8f8f2;&quot; class=&quot;language-lua &quot;&gt;&lt;code class=&quot;language-lua&quot; data-lang=&quot;lua&quot;&gt;&lt;span style=&quot;color:#6272a4;&quot;&gt;-- load immediately
-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6272a4;&quot;&gt;-- require(&amp;quot;nvim-autopairs&amp;quot;).setup({})
-&lt;&#x2F;span&gt;&lt;span&gt;
-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffffff;&quot;&gt;vim&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff79c6;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span&gt;api&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff79c6;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#50fa7b;&quot;&gt;nvim_create_autocmd&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f1fa8c;&quot;&gt;&amp;quot;InsertEnter&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffffff;&quot;&gt;{
-&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#50fa7b;&quot;&gt;callback &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#8be9fd;&quot;&gt;function&lt;&#x2F;span&gt;&lt;span&gt;()
-&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffffff;&quot;&gt;vim&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff79c6;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#50fa7b;&quot;&gt;cmd&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f1fa8c;&quot;&gt;&amp;quot;packadd nvim-autopairs&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;) 
-&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8be9fd;&quot;&gt;require&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f1fa8c;&quot;&gt;&amp;quot;nvim-autopairs&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff79c6;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#50fa7b;&quot;&gt;setup&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffffff;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span&gt;)
-&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff79c6;&quot;&gt;end&lt;&#x2F;span&gt;&lt;span&gt;,
-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffffff;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;)
-&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
-&lt;h4 id=&quot;configuring-an-lsp&quot;&gt;Configuring an LSP&lt;&#x2F;h4&gt;
-&lt;p&gt;File structure:&lt;&#x2F;p&gt;
-&lt;pre data-lang=&quot;text&quot; style=&quot;background-color:#282a36;color:#f8f8f2;&quot; class=&quot;language-text &quot;&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&lt;span&gt;nvim&#x2F;
-&lt;&#x2F;span&gt;&lt;span&gt;├─ lua&#x2F;
-&lt;&#x2F;span&gt;&lt;span&gt;│  └─ plugins&#x2F;
-&lt;&#x2F;span&gt;&lt;span&gt;│     └─ lsp.lua
-&lt;&#x2F;span&gt;&lt;span&gt;└─ init.lua
-&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
-&lt;p&gt;lsp.lua using mason:&lt;&#x2F;p&gt;
-&lt;pre data-lang=&quot;lua&quot; style=&quot;background-color:#282a36;color:#f8f8f2;&quot; class=&quot;language-lua &quot;&gt;&lt;code class=&quot;language-lua&quot; data-lang=&quot;lua&quot;&gt;&lt;span style=&quot;color:#ffffff;&quot;&gt;vim&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff79c6;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span&gt;pack&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff79c6;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#50fa7b;&quot;&gt;add&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffffff;&quot;&gt;{
-&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffffff;&quot;&gt;{ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f1fa8c;&quot;&gt;src &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f1fa8c;&quot;&gt;&amp;#39;https:&#x2F;&#x2F;github.com&#x2F;neovim&#x2F;nvim-lspconfig&amp;#39; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffffff;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;,
-&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffffff;&quot;&gt;{ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f1fa8c;&quot;&gt;src &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f1fa8c;&quot;&gt;&amp;#39;https:&#x2F;&#x2F;github.com&#x2F;mason-org&#x2F;mason.nvim&amp;#39; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffffff;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;,
-&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffffff;&quot;&gt;{ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f1fa8c;&quot;&gt;src &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f1fa8c;&quot;&gt;&amp;#39;https:&#x2F;&#x2F;github.com&#x2F;mason-org&#x2F;mason-lspconfig.nvim&amp;#39; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffffff;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;,
-&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffffff;&quot;&gt;{ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f1fa8c;&quot;&gt;src &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f1fa8c;&quot;&gt;&amp;#39;https:&#x2F;&#x2F;github.com&#x2F;WhoIsSethDaniel&#x2F;mason-tool-installer.nvim&amp;#39; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffffff;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;,
-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffffff;&quot;&gt;}
-&lt;&#x2F;span&gt;&lt;span&gt;
-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8be9fd;&quot;&gt;require&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f1fa8c;&quot;&gt;&amp;#39;mason&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff79c6;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#50fa7b;&quot;&gt;setup&lt;&#x2F;span&gt;&lt;span&gt;()
-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8be9fd;&quot;&gt;require&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f1fa8c;&quot;&gt;&amp;#39;mason-lspconfig&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff79c6;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#50fa7b;&quot;&gt;setup&lt;&#x2F;span&gt;&lt;span&gt;()
-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8be9fd;&quot;&gt;require&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#f1fa8c;&quot;&gt;&amp;#39;mason-tool-installer&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ff79c6;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#50fa7b;&quot;&gt;setup&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffffff;&quot;&gt;{
-&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6272a4;&quot;&gt;-- Define languages
-&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f1fa8c;&quot;&gt;ensure_installed &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffffff;&quot;&gt;{
-&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f1fa8c;&quot;&gt;&amp;quot;lua_ls&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;,
-&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f1fa8c;&quot;&gt;&amp;quot;clangd&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;,
-&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#f1fa8c;&quot;&gt;&amp;quot;pyright&amp;quot;
-&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffffff;&quot;&gt;}
-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#ffffff;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;)
-&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
-&lt;p&gt;And requiring &lt;code&gt;lsp.lua&lt;&#x2F;code&gt; within &lt;code&gt;init.lua&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
-&lt;pre style=&quot;background-color:#282a36;color:#f8f8f2;&quot;&gt;&lt;code&gt;&lt;span&gt;require(&amp;#39;plugins.lsp&amp;#39;)
-&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
-&lt;h3 id=&quot;ease-of-use&quot;&gt;Ease of use&lt;&#x2F;h3&gt;
-&lt;p&gt;Primarily why I wanted to give vim.pack a try is because I wanted something native and fairly straightforward to use. vim.pack has definitely succeeded with that for me even if it is a prerelease build. The roadmap for neovim does show that the 0.12 release will be when vim.pack goes on the main development branch. At the moment we are in 0.11 so it shouldn&#x27;t be too long of a wait.&lt;&#x2F;p&gt;
-&lt;p&gt;I&#x27;d suggest anybody to give vim.pack a try if they are not fully content with their current plugin manager.&lt;&#x2F;p&gt;
-&lt;p&gt;As I said before there&#x27;s fairly good documentation already on vim.pack if you run &lt;code&gt;:help vim.pack&lt;&#x2F;code&gt; on the prerelease build of neovim.&lt;&#x2F;p&gt;
-</description>
-      </item>
-    </channel>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+<title></title>
+<link>https:&#x2F;&#x2F;proxcb.xyz</link>
+<description></description>
+<generator>Zola</generator>
+<language>en</language>
+<atom:link href="https:&#x2F;&#x2F;proxcb.xyz&#x2F;rss.xml" rel="self" type="application/rss+xml"/>
+<lastBuildDate>Wed, 03 Dec 2025 00:00:00 +0000</lastBuildDate>
+
+<item>
+<title>Switch to a window manager</title>
+<pubDate>Wed, 03 Dec 2025 00:00:00 +0000</pubDate>
+<link>https://proxcb.xyz/blog/window-managers/</link>
+<guid>https://proxcb.xyz/blog/window-managers/</guid>
+
+<description>floating windows sucks, read about what tiling window managers are!</description>
+
+</item>
+
+<item>
+<title>proxcb.xyz</title>
+<pubDate>Sun, 09 Nov 2025 00:00:00 +0000</pubDate>
+<link>https://proxcb.xyz/blog/thename/</link>
+<guid>https://proxcb.xyz/blog/thename/</guid>
+
+<description>Where my username comes from</description>
+
+</item>
+
+<item>
+<title>State of vim.pack</title>
+<pubDate>Sun, 09 Nov 2025 00:00:00 +0000</pubDate>
+<link>https://proxcb.xyz/blog/vimpack/</link>
+<guid>https://proxcb.xyz/blog/vimpack/</guid>
+
+<description>vim.pack native plugin manager for neovim, what it is and is it worth switching</description>
+
+</item>
+
+</channel>
 </rss>
