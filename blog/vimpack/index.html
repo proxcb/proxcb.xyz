@@ -1,0 +1,42 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta content="width=device-width,initial-scale=1" name=viewport><link href=/favicon.ico rel=icon type=image/x-icon><title>proxcb blog</title><link href=https://proxcb.xyz/style.css rel=stylesheet><body><section class=section><div class=container><p><a href=/>back</a><h1 class=title>State of vim.pack</h1><p class=subtitle2><strong>2025-11-09</strong><h3 id=about>About</h3><p>As of <strong>November 2025</strong>, version <strong>0.12.0</strong> is still a prerelease development build<p>I'll share some of my thoughts and examples on <code>vim.pack</code> and whether it would be worth doing the switch already. This is primarily just an introductory of basic usage of plugins and of my experience with vim.pack. If you notice any inconsistencies or problems in this article, feel free to contact me with recommendations.<p>My full neovim config can be found at <strong><a href=https://github.com/proxcb/nvim rel=noopener target=_blank>github.com/proxcb/nvim</a></strong>, It contains a barebone (at the time of this post) configuration for development which is easy to expand on, I'm still primarily using Helix so I will be adding to it over time.<h3 id=examples>Examples</h3><p>Documentation can be found with <code>:help vim.pack</code><p><strong>Installing plugins is very straightforward:</strong><pre class=language-lua data-lang=lua style=color:#f8f8f2;background-color:#282a36><code class=language-lua data-lang=lua><span style=color:#fff>vim</span><span style=color:#ff79c6>.</span><span>pack</span><span style=color:#ff79c6>.</span><span style=color:#50fa7b>add</span><span>(</span><span style=color:#fff>{
+</span><span>  </span><span style=color:#6272a4>-- Install plugin
+</span><span>  </span><span style=color:#f1fa8c>"https://github.com/coolplugin-org/coolplugin"</span><span>,
+</span><span>
+</span><span>  </span><span style=color:#6272a4>-- Or with a table
+</span><span>  </span><span style=color:#fff>{ </span><span style=color:#f1fa8c>src </span><span>= </span><span style=color:#f1fa8c>"https://github.com/windwp/nvim-autopairs" </span><span style=color:#fff>}</span><span>,
+</span><span>  </span><span style=color:#fff>{ </span><span style=color:#f1fa8c>src </span><span>= </span><span style=color:#f1fa8c>"https://github.com/L3MON4D3/LuaSnip" </span><span style=color:#fff>}</span><span>,
+</span><span>  </span><span style=color:#fff>{ </span><span style=color:#f1fa8c>src </span><span>= </span><span style=color:#f1fa8c>"https://github.com/Saghen/blink.cmp" </span><span style=color:#fff>}
+</span><span style=color:#fff>}</span><span>)
+</span></code></pre><p>You can do more with this, such as defining a version or a name but that is irrelevant for me.<p><strong>Lazy loading can be done as well:</strong><pre class=language-lua data-lang=lua style=color:#f8f8f2;background-color:#282a36><code class=language-lua data-lang=lua><span style=color:#6272a4>-- load immediately
+</span><span style=color:#6272a4>-- require("nvim-autopairs").setup({})
+</span><span>
+</span><span style=color:#fff>vim</span><span style=color:#ff79c6>.</span><span>api</span><span style=color:#ff79c6>.</span><span style=color:#50fa7b>nvim_create_autocmd</span><span>(</span><span style=color:#f1fa8c>"InsertEnter"</span><span>, </span><span style=color:#fff>{
+</span><span>  </span><span style=color:#50fa7b>callback </span><span>= </span><span style=color:#8be9fd;font-style:italic>function</span><span>()
+</span><span>    </span><span style=color:#fff>vim</span><span style=color:#ff79c6>.</span><span style=color:#50fa7b>cmd</span><span>(</span><span style=color:#f1fa8c>"packadd nvim-autopairs"</span><span>) 
+</span><span>    </span><span style=color:#8be9fd>require</span><span>(</span><span style=color:#f1fa8c>"nvim-autopairs"</span><span>)</span><span style=color:#ff79c6>.</span><span style=color:#50fa7b>setup</span><span>(</span><span style=color:#fff>{}</span><span>)
+</span><span>  </span><span style=color:#ff79c6>end</span><span>,
+</span><span style=color:#fff>}</span><span>)
+</span></code></pre><h4 id=configuring-an-lsp>Configuring an LSP</h4><p>File structure:<pre class=language-text data-lang=text style=color:#f8f8f2;background-color:#282a36><code class=language-text data-lang=text><span>nvim/
+</span><span>├─ lua/
+</span><span>│  └─ plugins/
+</span><span>│     └─ lsp.lua
+</span><span>└─ init.lua
+</span></code></pre><p>lsp.lua using mason:<pre class=language-lua data-lang=lua style=color:#f8f8f2;background-color:#282a36><code class=language-lua data-lang=lua><span style=color:#fff>vim</span><span style=color:#ff79c6>.</span><span>pack</span><span style=color:#ff79c6>.</span><span style=color:#50fa7b>add</span><span style=color:#fff>{
+</span><span>  </span><span style=color:#fff>{ </span><span style=color:#f1fa8c>src </span><span>= </span><span style=color:#f1fa8c>'https://github.com/neovim/nvim-lspconfig' </span><span style=color:#fff>}</span><span>,
+</span><span>  </span><span style=color:#fff>{ </span><span style=color:#f1fa8c>src </span><span>= </span><span style=color:#f1fa8c>'https://github.com/mason-org/mason.nvim' </span><span style=color:#fff>}</span><span>,
+</span><span>  </span><span style=color:#fff>{ </span><span style=color:#f1fa8c>src </span><span>= </span><span style=color:#f1fa8c>'https://github.com/mason-org/mason-lspconfig.nvim' </span><span style=color:#fff>}</span><span>,
+</span><span>  </span><span style=color:#fff>{ </span><span style=color:#f1fa8c>src </span><span>= </span><span style=color:#f1fa8c>'https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim' </span><span style=color:#fff>}</span><span>,
+</span><span style=color:#fff>}
+</span><span>
+</span><span style=color:#8be9fd>require</span><span>(</span><span style=color:#f1fa8c>'mason'</span><span>)</span><span style=color:#ff79c6>.</span><span style=color:#50fa7b>setup</span><span>()
+</span><span style=color:#8be9fd>require</span><span>(</span><span style=color:#f1fa8c>'mason-lspconfig'</span><span>)</span><span style=color:#ff79c6>.</span><span style=color:#50fa7b>setup</span><span>()
+</span><span style=color:#8be9fd>require</span><span>(</span><span style=color:#f1fa8c>'mason-tool-installer'</span><span>)</span><span style=color:#ff79c6>.</span><span style=color:#50fa7b>setup</span><span>(</span><span style=color:#fff>{
+</span><span>    </span><span style=color:#6272a4>-- Define languages
+</span><span>    </span><span style=color:#f1fa8c>ensure_installed </span><span>= </span><span style=color:#fff>{
+</span><span>        </span><span style=color:#f1fa8c>"lua_ls"</span><span>,
+</span><span>        </span><span style=color:#f1fa8c>"clangd"</span><span>,
+</span><span>        </span><span style=color:#f1fa8c>"pyright"
+</span><span>    </span><span style=color:#fff>}
+</span><span style=color:#fff>}</span><span>)
+</span></code></pre><p>And requiring <code>lsp.lua</code> within <code>init.lua</code><pre style=color:#f8f8f2;background-color:#282a36><code><span>require('plugins.lsp')
+</span></code></pre><h3 id=ease-of-use>Ease of use</h3><p>Primarily why I wanted to give vim.pack a try is because I wanted something native and fairly straightforward to use. vim.pack has definitely succeeded with that for me even if it is a prerelease build. The roadmap for neovim does show that the 0.12 release will be when vim.pack goes on the main development branch. At the moment we are in 0.11 so it shouldn't be too long of a wait.<p>I'd suggest anybody to give vim.pack a try if they are not fully content with their current plugin manager.<p>As I said before there's fairly good documentation already on vim.pack if you run <code>:help vim.pack</code> on the prerelease build of neovim.</div></section>

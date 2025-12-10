@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+<title></title>
+<link>https:&#x2F;&#x2F;proxcb.xyz</link>
+<description></description>
+<generator>Zola</generator>
+<language>en</language>
+<atom:link href="https:&#x2F;&#x2F;proxcb.xyz&#x2F;rss.xml" rel="self" type="application/rss+xml"/>
+<lastBuildDate>Wed, 03 Dec 2025 00:00:00 +0000</lastBuildDate>
+
+<item>
+<title>Switch to a window manager</title>
+<pubDate>Wed, 03 Dec 2025 00:00:00 +0000</pubDate>
+<link>https://proxcb.xyz/blog/window-managers/</link>
+<guid>https://proxcb.xyz/blog/window-managers/</guid>
+
+<description>floating windows sucks, read about what tiling window managers are!</description>
+
+</item>
+
+<item>
+<title>State of vim.pack</title>
+<pubDate>Sun, 09 Nov 2025 00:00:00 +0000</pubDate>
+<link>https://proxcb.xyz/blog/vimpack/</link>
+<guid>https://proxcb.xyz/blog/vimpack/</guid>
+
+<description>vim.pack native plugin manager for neovim, what it is and is it worth switching</description>
+
+</item>
+
+</channel>
+</rss>
